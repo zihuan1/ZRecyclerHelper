@@ -26,6 +26,7 @@ fun RecyclerView.initVertical2(adapter: RecyclerView.Adapter<*>) =
 
 fun RecyclerView.initVertical(adapter: RecyclerView.Adapter<*>) = apply { initVertical2(adapter) }
 
+//九宫格布局
 fun RecyclerView.initGrid2(count: Int, adapter: RecyclerView.Adapter<*>) = getGridLayoutManager(count, this, adapter)
 
 fun RecyclerView.initGrid(count: Int, adapter: RecyclerView.Adapter<*>) = apply { initGrid2(count, adapter) }
