@@ -58,7 +58,7 @@ class RecycleViewDivider : ItemDecoration {
      * @param dividerHeight 分割线高度
      * @param dividerColor  分割线颜色
      */
-    constructor(context: Context, orientation: Int, dividerHeight: Int, dividerColor: Int) {
+    constructor(context: Context, dividerColor: Int ,dividerHeight: Int,orientation: Int=LinearLayoutManager.VERTICAL) {
         val a = context.obtainStyledAttributes(ATTRS)
         mDivider = a.getDrawable(0)
         mDividerHeight = dividerHeight
