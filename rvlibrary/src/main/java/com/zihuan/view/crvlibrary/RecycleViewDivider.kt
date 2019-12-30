@@ -28,7 +28,7 @@ class RecycleViewDivider : ItemDecoration {
      * @param context
      * @param orientation 列表方向
      */
-    constructor(context: Context, orientation: Int) {
+    constructor(context: Context, orientation: Int=LinearLayoutManager.VERTICAL ) {
         require(!(orientation != LinearLayoutManager.VERTICAL && orientation != LinearLayoutManager.HORIZONTAL)) { "请输入正确的参数！" }
         mOrientation = orientation
         val a = context.obtainStyledAttributes(ATTRS)
@@ -43,9 +43,10 @@ class RecycleViewDivider : ItemDecoration {
      * @param orientation 列表方向
      * @param drawableId  分割线图片
      */
-    constructor(context: Context, orientation: Int, drawableId: Int) {
+    constructor(context: Context, orientation: Int, drawableId: Int=LinearLayoutManager.VERTICAL ) {
         mDivider = context.resources.getDrawable(drawableId)
-        mDividerHeight = mDivider.intrinsicHeight
+        if (mDivider.intrinsicHeight != 0)
+            mDividerHeight = mDivider.intrinsicHeight
     }
 
     /**
@@ -101,7 +102,13 @@ class RecycleViewDivider : ItemDecoration {
                 mDivider!!.draw(canvas)
             }
             if (mPaint != null) {
-                canvas.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), mPaint)
+                canvas.drawRect(
+                    left.toFloat(),
+                    top.toFloat(),
+                    right.toFloat(),
+                    bottom.toFloat(),
+                    mPaint
+                )
             }
         }
     }
@@ -127,7 +134,13 @@ class RecycleViewDivider : ItemDecoration {
                 mDivider!!.draw(canvas)
             }
             if (mPaint != null) {
-                canvas.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), mPaint)
+                canvas.drawRect(
+                    left.toFloat(),
+                    top.toFloat(),
+                    right.toFloat(),
+                    bottom.toFloat(),
+                    mPaint
+                )
             }
         }
     }
@@ -173,7 +186,12 @@ class RecycleViewDivider : ItemDecoration {
         }
     }
 
-    private fun isLastColumn(parent: RecyclerView, pos: Int, spanCount: Int, childCount: Int): Boolean {
+    private fun isLastColumn(
+        parent: RecyclerView,
+        pos: Int,
+        spanCount: Int,
+        childCount: Int
+    ): Boolean {
         var childCount = childCount
         val layoutManager = parent.layoutManager
         if (layoutManager is GridLayoutManager) {
@@ -195,7 +213,12 @@ class RecycleViewDivider : ItemDecoration {
         return false
     }
 
-    private fun isLastRaw(parent: RecyclerView, pos: Int, spanCount: Int, childCount: Int): Boolean {
+    private fun isLastRaw(
+        parent: RecyclerView,
+        pos: Int,
+        spanCount: Int,
+        childCount: Int
+    ): Boolean {
         val layoutManager = parent.layoutManager
         if (layoutManager is GridLayoutManager) { // 如果是最后一行，则不需要绘制底部
             if (pos + spanCount >= childCount) return true
