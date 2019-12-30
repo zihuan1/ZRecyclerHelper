@@ -58,6 +58,8 @@ class RecycleViewDivider : ItemDecoration {
      * @param dividerColor  分割线颜色
      */
     constructor(context: Context, orientation: Int, dividerHeight: Int, dividerColor: Int) {
+        val a = context.obtainStyledAttributes(ATTRS)
+        mDivider = a.getDrawable(0)
         mDividerHeight = dividerHeight
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mPaint!!.color = dividerColor
@@ -98,8 +100,8 @@ class RecycleViewDivider : ItemDecoration {
             val top = child.bottom + layoutParams.bottomMargin
             val bottom = top + mDividerHeight
             if (mDivider != null) {
-                mDivider!!.setBounds(left, top, right, bottom)
-                mDivider!!.draw(canvas)
+                mDivider.setBounds(left, top, right, bottom)
+                mDivider.draw(canvas)
             }
             if (mPaint != null) {
                 canvas.drawRect(
