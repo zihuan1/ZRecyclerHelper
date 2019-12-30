@@ -43,8 +43,9 @@ class RecycleViewDivider : ItemDecoration {
      * @param orientation 列表方向
      * @param drawableId  分割线图片
      */
-    constructor(context: Context, orientation: Int, drawableId: Int=LinearLayoutManager.VERTICAL ) {
+    constructor(context: Context, drawableId: Int , orientation: Int=LinearLayoutManager.VERTICAL) {
         mDivider = context.resources.getDrawable(drawableId)
+        mOrientation = orientation
         if (mDivider.intrinsicHeight != 0)
             mDividerHeight = mDivider.intrinsicHeight
     }
