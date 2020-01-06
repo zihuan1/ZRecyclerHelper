@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 class RecycleViewDivider : ItemDecoration {
     private var mPaint: Paint? = null
-    private lateinit var mDivider: Drawable
-    private var mDividerHeight = 2 //分割线高度，默认为1px
+    private var mDivider: Drawable
+    var mDividerHeight = 2 //分割线高度，默认为1px
     //列表的方向：LinearLayoutManager.VERTICAL或LinearLayoutManager.HORIZONTAL
-    private var mOrientation = LinearLayoutManager.VERTICAL
+    var mOrientation = LinearLayoutManager.VERTICAL
     private val ATTRS = intArrayOf(R.attr.listDivider)
 
     /**
@@ -28,7 +28,7 @@ class RecycleViewDivider : ItemDecoration {
      * @param context
      * @param orientation 列表方向
      */
-    constructor(context: Context, orientation: Int=LinearLayoutManager.VERTICAL ) {
+    constructor(context: Context, orientation: Int = LinearLayoutManager.VERTICAL) {
         require(!(orientation != LinearLayoutManager.VERTICAL && orientation != LinearLayoutManager.HORIZONTAL)) { "请输入正确的参数！" }
         mOrientation = orientation
         val a = context.obtainStyledAttributes(ATTRS)
@@ -43,7 +43,7 @@ class RecycleViewDivider : ItemDecoration {
      * @param orientation 列表方向
      * @param drawableId  分割线图片
      */
-    constructor(context: Context, drawableId: Int , orientation: Int=LinearLayoutManager.VERTICAL) {
+    constructor(context: Context, drawableId: Int, orientation: Int = LinearLayoutManager.VERTICAL) {
         mDivider = context.resources.getDrawable(drawableId)
         mOrientation = orientation
         if (mDivider.intrinsicHeight > 0)
@@ -58,7 +58,7 @@ class RecycleViewDivider : ItemDecoration {
      * @param dividerHeight 分割线高度
      * @param dividerColor  分割线颜色
      */
-    constructor(context: Context, dividerColor: Int ,dividerHeight: Int,orientation: Int=LinearLayoutManager.VERTICAL) {
+    constructor(context: Context, dividerColor: Int, dividerHeight: Int, orientation: Int = LinearLayoutManager.VERTICAL) {
         val a = context.obtainStyledAttributes(ATTRS)
         mDivider = a.getDrawable(0)
         mDividerHeight = dividerHeight
@@ -106,11 +106,11 @@ class RecycleViewDivider : ItemDecoration {
             }
             if (mPaint != null) {
                 canvas.drawRect(
-                    left.toFloat(),
-                    top.toFloat(),
-                    right.toFloat(),
-                    bottom.toFloat(),
-                    mPaint
+                        left.toFloat(),
+                        top.toFloat(),
+                        right.toFloat(),
+                        bottom.toFloat(),
+                        mPaint
                 )
             }
         }
@@ -138,11 +138,11 @@ class RecycleViewDivider : ItemDecoration {
             }
             if (mPaint != null) {
                 canvas.drawRect(
-                    left.toFloat(),
-                    top.toFloat(),
-                    right.toFloat(),
-                    bottom.toFloat(),
-                    mPaint
+                        left.toFloat(),
+                        top.toFloat(),
+                        right.toFloat(),
+                        bottom.toFloat(),
+                        mPaint
                 )
             }
         }
@@ -155,10 +155,10 @@ class RecycleViewDivider : ItemDecoration {
 
     //获取分割线尺寸
     override fun getItemOffsets(
-        outRect: Rect,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         val itemPosition = parent.getChildAdapterPosition(view)
@@ -190,10 +190,10 @@ class RecycleViewDivider : ItemDecoration {
     }
 
     private fun isLastColumn(
-        parent: RecyclerView,
-        pos: Int,
-        spanCount: Int,
-        childCount: Int
+            parent: RecyclerView,
+            pos: Int,
+            spanCount: Int,
+            childCount: Int
     ): Boolean {
         var childCount = childCount
         val layoutManager = parent.layoutManager
@@ -217,17 +217,17 @@ class RecycleViewDivider : ItemDecoration {
     }
 
     private fun isLastRaw(
-        parent: RecyclerView,
-        pos: Int,
-        spanCount: Int,
-        childCount: Int
+            parent: RecyclerView,
+            pos: Int,
+            spanCount: Int,
+            childCount: Int
     ): Boolean {
         val layoutManager = parent.layoutManager
         if (layoutManager is GridLayoutManager) { // 如果是最后一行，则不需要绘制底部
             if (pos + spanCount >= childCount) return true
         } else if (layoutManager is StaggeredGridLayoutManager) {
             val orientation = layoutManager
-                .orientation
+                    .orientation
             // StaggeredGridLayoutManager 且纵向滚动
             if (orientation == StaggeredGridLayoutManager.VERTICAL) { // 如果是最后一行，则不需要绘制底部
                 if (pos + spanCount >= childCount) return true
